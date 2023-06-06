@@ -6,11 +6,19 @@ Create embeddings for Facebook Messenger and Instagram chat history with two ste
 ### Step 1: Download Messenger / Instagram data
 Because of GDPR, users can download data, which includes your chat history on Facebook Messenger and Instagram. For a complete guide on how to request your data from Facebook, check out here for [Messenger](https://www.facebook.com/help/212802592074644/) and here for [Instagram](https://help.instagram.com/181231772500920).
 
-_**Note:** Make sure you don't have professional mode turned on. Professional mode is a new Facebook feature that allows you to manage your Facebook / Instagram as a business owner. In doing so, you relinquish the ability to download chat history since there might be sensitive data about customers._ 
+![Download Messenger messages](img/Messenger.png)
+
+![Download Instagram messages](img/Instagram.png)
+
+
+_**Note:** Make sure you don't have professional mode turned on. [Professional mode](https://www.facebook.com/business/help/545581016154662) is a new Facebook feature that allows you to manage your Facebook / Instagram as a business owner. Since there might be sensitive data about customers, you can't download chat data when you're on the professional mode._ 
 
 ### Step 2: Put the `messages/` folder in the same directory as `src/` 
 
-Once you have downloaded the data, the directory would look like this. Select conversations that you want to create embeddings and drop them in a `messages` folder in the same directory as `src`
+Once you have downloaded the data, the directory would look like this. 
+![Chat directory](img/downloaded_chat.png)
+
+Select conversations that you want to create embeddings and drop them in a `messages` folder in the same directory as `src`
 
 ### Step 3: Install required packages
 
