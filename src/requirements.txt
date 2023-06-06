@@ -1,0 +1,4 @@
+langchain
+chromadb
+sentence_transformers
+openai
