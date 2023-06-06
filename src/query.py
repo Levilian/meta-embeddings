@@ -18,12 +18,12 @@ os.environ["TOKENIZERS_PARALLELISM"] = "false"
 def create_qa_chain(prompt_context: dict):
     date_str = date.today().strftime("%Y-%m-%d")
     date_prompt = f"Today's date is {date_str}. "
-    name_prompt = f"The question below is asked by the conversation participant: {prompt_context['name']}." if prompt_context['name'] else ""
+    name_prompt = f"The question below is asked by {prompt_context['name']}." if prompt_context['name'] else ""
     prompt_template = (
             date_prompt
             + name_prompt
             + (
-                """Use the following pieces of chat messages to answer the question or follow the instruction. If you don't know the answer, just say that you don't know, don't try to make up an answer. 
+                """You're an expert at analyzing conversations. Use the following pieces of chat messages to answer the question. If you don't know the answer, just say that you don't know, don't try to make up an answer. Remember to reference participant names when giving an answer. 
 
                 {context}
 
@@ -46,16 +46,17 @@ def create_qa_chain(prompt_context: dict):
 
     chain_type_kwargs = {"prompt": PROMPT, "verbose": False}
 
-    qa = RetrievalQA.from_chain_type(llm=OpenAI(),
+    qa = RetrievalQA.from_chain_type(llm=OpenAI(max_tokens=1000, temperature=0.3),
                                      chain_type="stuff",
                                      chain_type_kwargs=chain_type_kwargs,
-                                     retriever=vectorstore.as_retriever())
+                                     retriever=vectorstore.as_retriever(search_kwargs={"k": 7}),
+                                     )
 
     return qa
 
 def main():
-
-    qa = create_qa_chain({"name": "levi"})
+    name = input("What's your name?\n")
+    qa = create_qa_chain({"name": name})
     while True:
         query = input("\nEnter a question:\n")
         if query == "exit":

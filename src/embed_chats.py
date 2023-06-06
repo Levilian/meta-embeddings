@@ -5,10 +5,10 @@ from utils import unicode_converter, hf_embedding
 from langchain.text_splitter import SentenceTransformersTokenTextSplitter
 from langchain.vectorstores import Chroma
 from langchain.docstore.document import Document
-from langchain.embeddings import HuggingFaceEmbeddings
 from typing import List
 
 persist_directory="./.db"
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 def create_embeddings(dir_path: str, data_source = 'messenger'):
     """
